@@ -1,1 +1,1 @@
-# large-scale GCAM Simulations on a Super Computer
+# large-scale GCAM Simulations on UMASS super Computer
