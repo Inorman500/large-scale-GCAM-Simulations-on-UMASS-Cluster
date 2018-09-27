@@ -13,10 +13,11 @@ Hi
 Here's a break down of the directories
 
 All-Samples: The samples that will be placed on the cluster. Paste the entire folder onto the cluster
+The code automatically create the all sample files. These are GCAM input files.
 
 Original Copy: These are unmodified files that are kept as a reference, before modification.
 
-folders in Original Copy: These are modied files from original copy that hace just the technologies that you want to run
+folders in Original Copy: These are modied files from original copy that has just the technologies that you want to run
 
 Makking the code run:
 
@@ -82,7 +83,7 @@ def findStartingRow(df):
 # Then get rid of this method to save like 1 or 2 seconds
     # we are looking for the right row ofr where we need to start in 2015
     ###################################
-    #hERE i AM MAKING THE ASSUMPTIONS THAT FOR MOST FILES THE STARTING 2015 WILL NOT BE THE SAME
+    #HERE i AM MAKING THE ASSUMPTIONS THAT FOR MOST FILES THE STARTING 2015 WILL NOT BE THE SAME
     ###########################
     for i in range(0,(df.shape)[0]):
         row=df.iloc[i].tolist()# This is the entire row. I'll keep this for now for debugging purposes
