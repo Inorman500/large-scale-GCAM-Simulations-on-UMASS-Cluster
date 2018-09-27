@@ -1,0 +1,50 @@
+<?xml version="1.0" ?><ModelInterfaceBatch>
+	<class name="ModelInterface.ModelGUI2.InputViewer">
+	<command name="CSV file">
+		<headerFile>C:/Users/ivan/Desktop/Gcam stuff/input/gcam-data-system/_common//ModelInterface_headers.txt</headerFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.EQUIV_TABLE.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.Supplysector_relative-cost-logit.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.Supplysector_absolute-cost-logit.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.Supplysector_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.ElecReserve.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.SubsectorLogit_relative-cost-logit.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.SubsectorLogit_absolute-cost-logit.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.SubsectorLogit_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.SubsectorShrwtFllt_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.SubsectorShrwt_nuc.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.SubsectorShrwt_renew.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.SubsectorInterp_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.SubsectorInterpTo_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.StubTech_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.GlobalIntTechEff_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.GlobalTechEff_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.GlobalTechCapFac_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.GlobalIntTechCapFac_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.GlobalTechCapital_elec.csv</csvFile><!--Change this-->
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.GlobalIntTechCapital_elec.csv</csvFile><!--Wind Solar-->
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.GlobalTechOMfixed_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.GlobalIntTechOMfixed_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.GlobalTechOMvar_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.GlobalIntTechOMvar_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.GlobalTechShrwt_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.GlobalTechInterp_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.GlobalIntTechShrwt_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.PrimaryRenewKeyword_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.PrimaryRenewKeywordInt_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.AvgFossilEffKeyword_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.GlobalTechCapture_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.GlobalIntTechBackup_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.StubTechCapFactor_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.GlobalTechSCurve_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.GlobalTechLifetime_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.GlobalIntTechLifetime_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.GlobalTechProfitShutdown_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.StubTechCalInput_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.StubTechFixOut_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.StubTechFixOut_hydro.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.StubTechProd_elec.csv</csvFile>
+		<csvFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/Original copy//L223.StubTechEff_elec.csv</csvFile>
+		<outFile>C:/Users/Ivan/PycharmProjects/REU_ResearchLab/All Samples/Sample-1//Electricity-1.xml</outFile>
+ 	</command>
+	</class>
+</ModelInterfaceBatch>
