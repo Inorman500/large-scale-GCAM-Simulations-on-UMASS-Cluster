@@ -8,28 +8,6 @@ from collections import deque
 from xml.dom.minidom import parse
 from shutil import rmtree,copy # just to clear things
 
-"""
-Hi
-Here's a break down of the directories
-
-All-Samples: The samples that will be placed on the cluster. Paste the entire folder onto the cluster
-The code automatically create the all sample files. These are GCAM input files.
-
-Original Copy: These are unmodified files that are kept as a reference, before modification.
-
-folders in Original Copy: These are modied files from original copy that has just the technologies that you want to run
-
-Makking the code run:
-
-1. make sure you have a folder called Original Copy
-
-2. inside of oringinal Copy, open the file called "BatchCSV_elec.xml" and change ALL the paths to your paths. 
-
-
-General instructions**********************
-If you would like to make changes to the configuration file, make your changes to the "Configuration_ref.mxl" inside of original copy
-    
-"""
 
 
 def elicitation_Units_calc(sample_value, currentYear, Gcam_StartValue, costFloor, min, max_value): # THis caclulatees the elicitation units.
