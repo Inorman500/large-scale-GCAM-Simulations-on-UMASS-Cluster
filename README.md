@@ -8,12 +8,13 @@ The code works in 5 Steps:
 4. The program replaces the values for each chosen technology in GCAM CSVs, for each sample.
 5. The program creates  N amount of input folders, where N is the number of samples the user chooses
 
-All-Samples: The samples that will be placed on the cluster. Paste the entire folder onto the cluster
-The code automatically creates the all sample files. These are GCAM input files.
+All-Samples: The folder that will hold all the input files created for each sample value
 
 Original Copy: These are unmodified GCAM files that are kept as a reference, before modification.
 
-folders in Original Copy: These are modified files from original copy that has just the technologies that you want to run
+folders in Original Copy: These are modified files from original copy that has just the technologies that you want to run.
+
+
 Gsimulation.sh is a bash script used to run 1000 separate Simulations of GCAM in parallel on the UMass cluster(MGHPCC).
 
 
