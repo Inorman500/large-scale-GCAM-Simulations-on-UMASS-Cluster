@@ -11,7 +11,7 @@ from shutil import rmtree, copy  # just to clear things 		<Value name="policy">.
 from numpy import log, exp
 
 
-# dfgdfgdgd
+# THanks
 def formulacalc(sample_value, currentYear, Gcam_StartValue, costFloor, min,
                 max_value):  # THis caclulatees the elicitation units.
     # offset is the year that you start at 0 is 2015
