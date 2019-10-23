@@ -39,6 +39,7 @@ def createVals(samplenum):
     for Tech in techList: # THis gets all technologies in the intermediate feild
         if Tech=="rooftop_pv":
             continue
+        # Temporary arrays to hold values
         temparry = list()
         temparry2=list()
         # Prices_2030.loc[["Max"]]["wind"][0] this will select the max value in the wind colum
@@ -48,21 +49,25 @@ def createVals(samplenum):
         minVal = Prices_2030.loc[["Min"]][Tech][0]
         # val_2015 = Prices_2030.loc[["val 2015"]][Tech][0] # was used for the old equation
         Gcam_StartValue = Prices_2030.loc[["Gcam_StartValue"]][Tech][0]
-        costfloor = 8  # This is going to be some constat
+        costfloor = 8  # This is going to be some set constant
         for t in range(2010,2105,5): ## calulate the values for each technology
-            # print(str(sample_Num)+"here are the vals")
+            # print(str(sample_Num)+"here are the vals") debug statement
             # def formulacalc(sample_value, currentYear, Gcam_StartValue, costFloor, min, max_value):  # THis caclulatees the elicitation units.
-
             temparry.append(
-                formulacalc(sampleVal, t, Gcam_StartValue, costfloor, minVal,
+                formulacalc(sampleVal,  # Expert elicitation for a specific technolgy and year
+                            t,  # time 2015,2020 etc
+                            Gcam_StartValue,
+                            costfloor,
+                            minVal,  # minimum value for the technology
                             maxval) / Elicitation_to_GCAM_Conversion_Factors)
+            # Debug statements
             # print(Tech+ "Sample "+str(sample_Num))
             # print("val2030 : "+str(sampleVal))
             # print("val_2015: "+str(val_2015))
             # print("minVal: " + str(minVal))
             # print("maxVal: " + str(maxval))
             # print("val_2015 - minVal: "+ str(val_2015 - minVal))
-
+        # The subtechnolgy/ intermediate technology name for the specified technology
         intermediateTech= Prices_2030.loc[["intermediate Tech"]][Tech][0]
 
         newdict[intermediateTech]=deque(temparry)
@@ -95,13 +100,12 @@ def createVals(samplenum):
     #
     return newdict
 
-
 def toXLXS(fileName):  # This converts a CSV to Ecell.
     """ Converts CSV to excell. Takes in a parameter of the filepath for a csv
            """
     # Pandas was not used because it does some strange formatting
     # most of these files that are created as XLSX are just to extract the dataframe and nothing else,
-    # hence this is why a kunk filepath was used
+    # hence this is why a junk filepath was used
     name = os.path.basename(fileName).split(
         '\\')[-1].split('.csv')
     workbook = Workbook(os.path.join(junkPath,str(name[0])+ '.xlsx'), {'strings_to_numbers': True, 'constant_memory': True})
@@ -115,7 +119,9 @@ def toXLXS(fileName):  # This converts a CSV to Ecell.
     workbook.close()
     return (str(name[0]))
 def findStartingRow(df):
-    """This finds the index of the first 2015 row in the dataframe"""
+    """This finds the index of the first 2015 row in the dataframe
+        since all of our datat starts in 2015
+"""
     ###################################
     #hERE i AM MAKING THE ASSUMPTIONS THAT FOR MOST FILES THE STARTING 2015 WILL NOT BE THE SAME
     ###########################
@@ -155,9 +161,9 @@ def claerAllsamples():
 
 
 def updateConfig(cconfigPath, samplenum, elecfileLInk, rsrcfileLInk, entransform_outfilepath):  # path to CSV really....
-    """This creates a config file for each sample and poinnts the config to a corresponding Electricity file
+    """This creates a config file for each sample and points the config to a corresponding Electricity file
                """
-    # chnage the path of the elctricity file and the resource file
+    # change the path of the elctricity file and the resource file
     #    ConfigFile.getElementsByTagName("ScenarioComponents")[0].getElementsByTagName("Value")[44].firstChild.data="../input/All-Samples/Sample-"+samplenum+"/carbon_tax-"+samplenum+".xml" # Changing tname for electricity file
     ConfigFile.getElementsByTagName("ScenarioComponents")[0].getElementsByTagName("Value")[
         43].firstChild.data = elecfileLInk  # Changing tname for electricity file
@@ -178,12 +184,17 @@ def updateConfig(cconfigPath, samplenum, elecfileLInk, rsrcfileLInk, entransform
 
     ConfigFile.writexml(newXMLFile, indent="\n", addindent="", newl="")  # save changes to in the custom inputs.
 def toXMLpath (fullpath,type): # Convert from Normal path to xml path
-    """ Convert a normal filePath on windwos to a XML filepath for GCAm"""
-    splitted=(fullpath.split('\\'))
+    """ Convert a normal filePath on windwos to a XML filepath for GCAM
+    ex: on windows we have
+    C:\Users\owner\Documents
+    for GCAM xpath is used so in Xpath it is
+    C:/Users/owner/Documents
+    """
+    splitted = (fullpath.split('\\'))  # splits the file path by \
     newPath=""
     if "file" ==type:
         if "" in splitted:
-            splitted.remove("")
+            splitted.remove("")  # removes spaces
         for part in range(0,splitted.__len__()-1):
             newPath=newPath+splitted[part]+"/"
         newPath=newPath+"/"+splitted[splitted.__len__()-1]
@@ -192,9 +203,6 @@ def toXMLpath (fullpath,type): # Convert from Normal path to xml path
             splitted.remove("")
         for part in range(0,splitted.__len__()):
             newPath=newPath+splitted[part]+"/"
-
-
-
     return newPath
 def toNormalFilePath (xmlPath):
     """ converts XML to Normal file path"""
@@ -208,11 +216,16 @@ def toNormalFilePath (xmlPath):
     return correctPath
 
 
-def createCCSvals(samplenum, samplestore):  # Make sure to add biomass and do the addition here
-    ' This funvtion will replace the CCS files in the GlobalTechCapital_elec or GlobalIntTechCapital_elec files'
+def createCCSvals(samplenum, samplestore):
+    ' This function will replace the CCS files in the GlobalTechCapital_elec or GlobalIntTechCapital_elec files this '
+    """samplestore: This is basically a dictonary that comes out of create vals
+        samplenum: The current sample that youare on
+    """
+
+
     # This is a dictionary that will hold the base cost of technologies for which we want to add our own
     CCSvals = dict()  # THis si the dictionary that will be returned to replace the value
-    CCSbasecost = {
+    CCSbasecost = {  # These are base costs that will never change . They are constant
         "coal (conv pul)": [850, 898, 887, 877, 867, 858, 849, 840, 832, 824, 817, 810, 803, 797, 791, 785, 780, 774,
                             769],
         "gas (CC)": [320, 325, 321, 318, 314, 311, 307, 304, 301, 298, 296, 293, 291, 288, 286, 284, 282, 280, 279],
@@ -222,7 +235,7 @@ def createCCSvals(samplenum, samplestore):  # Make sure to add biomass and do th
                         900, 895]
     }
     # l= list(samplestore["biomass (conv)"].copy())[0]
-    if "biomass (conv)" in samplestore:  # I haveto manually add biomass here since it is changing
+    if "biomass (conv)" in samplestore:  # I haveto manually add biomass here since it is changing with each smaple
         CCSbasecost["biomass (conv)"] = list(samplestore["biomass (conv)"].copy())
         CCSbasecost["biomass (IGCC)"] = list(samplestore["biomass (IGCC)"].copy())
 
@@ -243,11 +256,11 @@ def createCCSvals(samplenum, samplestore):  # Make sure to add biomass and do th
     Gcam_StartValue = CCS_costs.loc["Val2010"][0]
     CalculatedCCS = list()  # these will hold the calculated CCS cvalues
     Ccsval = list()
-    for currentYear in range(2010, 2105, 5):
+    for currentYear in range(2010, 2105, 5):  # This is where I put hte CCS costs through the equation for each year
         CalculatedCCS.append(formulacalc(sampleVal, currentYear, Gcam_StartValue, costfloor, manval,
                                          maxval) / Elicitation_to_GCAM_Conversion_Factors)
 
-    for key, val in CCSbasecost.items():
+    for key, val in CCSbasecost.items():  # This is where I add the CCS cost to each base cost
         Ccsval = [x + y for x, y in zip(CalculatedCCS, val)]
         ccsname = CCSadded[key]
         samplestore[ccsname] = deque(Ccsval)
@@ -258,7 +271,7 @@ def createCCSvals(samplenum, samplestore):  # Make sure to add biomass and do th
 def createEffvals(sample):
     results = dict()
     ' This function creates the values used to replace the ones in GlobalTechEff_elec.csv'
-    'again, the parameter sample is teh current sample number'
+    'again, the parameter sample is the current sample number'
 
     Effbasevals = {  # These are the base cost of the efficeiencies
         "coal (IGCC)": [0.407, 0.407, 0.426, 0.442, 0.458, 0.471, 0.484, 0.495, 0.505, 0.514, 0.522, 0.530, 0.536,
@@ -273,15 +286,16 @@ def createEffvals(sample):
     }
 
     IGCC_addon = [0.054, 0.054, 0.059, 0.064, 0.069, 0.071, 0.075, 0.078, 0.08, 0.082, 0.082, 0.084, 0.085, 0.085,
-                  0.085, 0.086, 0.086, 0.086, 0.087]
+                  0.085, 0.086, 0.086, 0.086, 0.087]  # IGCC values to add to base cost
 
+    # Playing around with how I'd actually do this
     # CCS_EnPen_val=Effsamplevals.loc[1][' CCS energy penalty']
 
     # if "biomass (conv)" in samplestore:  # I haveto manually add biomass here since it is changing
     #   Effbasevals["biomass (conv)"] = list(samplestore["biomass (conv)"].copy())
     #  Effbasevals["biomass (IGCC)"] = list(samplestore["biomass (IGCC)"].copy())
 
-    # This dictionary is the name of the technologies that we are going to replace inte excell with our ccs costs
+    # This dictionary is the name of the technologies that we are going to replace in the excell with our ccs costs
     Effnames = {
         "coal (IGCC)": "coal (IGCC CCS)",
         "gas (CC)": "gas (CC CCS)",
@@ -618,7 +632,7 @@ L223_GlobalTechCapital = raw_Data_file2.parse('Sheet1', skiprows=0)  # Open the 
 GlobalTechEff_elec = raw_Data_file3.parse('Sheet1', skiprows=0)  # open the sheet of Eff values
 GlobalTechCost_en = raw_Data_file4.parse('L222.GlobalTechCost_en', skiprows=0)
 GlobalTechCoef_en = raw_Data_file5.parse('L222.GlobalTechCoef_en', skiprows=0)
-effstartingrow = 70  # This is the first row that has 2010 vlaues L222.GlobalTechCoef_en
+effstartingrow = 70  # This is the first row that has 2015 vlaues L222.GlobalTechCoef_en
 GlobalTechCoef_enstart = findStartingRow(GlobalTechCoef_en)
 GlobalTechCost_en_start = findStartingRow(GlobalTechCost_en)
 dfToModify = [L223_GlobalTechCapital, L223_GlobalIntTechCapital]
@@ -645,7 +659,7 @@ for sample_Num in range(1, num_of_samples):
         startingRow=findStartingRow(CsvFile) # this tells us which row to start at. It looks at teh first row with 2010
         for row in range(startingRow, (CsvFile.shape)[0]): # This will let us replace all the values up to the last element in the CSV
             techFromCsv=CsvFile.iloc[row, 2] # This gets the name of the technology in the third collumn at a certain row
-            if techFromCsv in newvals: # This is a check just to make sure those technologies are int the dictionary
+            if techFromCsv in newvals:  # This is a check just to make sure those technologies are in the dictionary
                CsvFile.iloc[row, 5] = newvals[techFromCsv].popleft() # replace the value of the technology in the CSV
 
         changed_File_path=os.path.join(sampledir,name+".csv")# This is the fileplath of the changed file
@@ -777,4 +791,3 @@ end = time.clock()
 Ex_time = (end - start) / 60
 print("All samples are done. this took " + str(Ex_time) + " min")
 
-# This is the end of the program , YOu dont beed to add any other coide besdiesd the one in here
